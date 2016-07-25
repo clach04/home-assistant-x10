@@ -72,6 +72,7 @@ class X10Switch(ToggleEntity):
     @property
     def is_on(self):
         """Return true if device is on."""
+        # returns cached state
         return self._state
 
     def turn_on(self):
@@ -89,3 +90,15 @@ class X10Switch(ToggleEntity):
         # TODO success check?
         self._state = False
         self.update_ha_state()
+
+    '''
+    def update(self):
+        """Fetch new state data for this switch.
+
+        This is the only method that should fetch new data for Home Assistant.
+        This is the only method that should fetch new data for Home Assitant. TYPO fixme upstream in https://home-assistant.io/developers/platform_example_light/ wiki
+        """
+        # (Probably) called every 30 seconds
+        # is_on() should then return that state
+        _LOGGER.info('update() called')
+    '''

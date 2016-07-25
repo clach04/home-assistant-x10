@@ -42,6 +42,9 @@ def setup_platform(hass, config, add_devices, discovery_info=None):
     switches = []
     for house_and_unit, name in switches_config.items():
         house_code, unit_number = house_and_unit[0], house_and_unit[1:]
+        if unit_number == '':
+            # Assume this is for the whole house
+            unit_number = None
 
         # should house_code, unit_number be validated here?
         # Validation will take place when attempting to switch on/off
@@ -77,16 +80,22 @@ class X10Switch(ToggleEntity):
 
     def turn_on(self):
         """Turn the device on."""
-        #self._device.x10_command(self._house_code, self._unit_number, x10_any.ON)
-        self._device.x10_command(self._house_code, self._unit_number, 'ON')
+        if self._unit_number is None:
+            state = 'all_lights_on'  # x10_any.LAMPS_ON
+        else:
+            state = 'ON'  # x10_any.ON
+        self._device.x10_command(self._house_code, self._unit_number, state)
         # TODO success check?
         self._state = True
         self.update_ha_state()
 
     def turn_off(self):
         """Turn the device off."""
-        #self._device.x10_command(self._house_code, self._unit_number, x10_any.OFF)
-        self._device.x10_command(self._house_code, self._unit_number, 'OFF')
+        if self._unit_number is None:
+            state = 'all_units_off'  # x10_any.ALL_OFF
+        else:
+            state = 'OFF'  # x10_any.OFF
+        self._device.x10_command(self._house_code, self._unit_number, state)
         # TODO success check?
         self._state = False
         self.update_ha_state()

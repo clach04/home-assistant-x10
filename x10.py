@@ -56,6 +56,7 @@ def setup_platform(hass, config, add_devices, discovery_info=None):
 
         # should house_code, unit_number be validated here?
         # Validation will take place when attempting to switch on/off
+        _LOGGER.info('Adding X10Switch%r', (dev, name, house_code, unit_number))
         switches.append(X10Switch(dev, name, house_code, unit_number))
     add_devices(switches)
 

@@ -43,8 +43,10 @@ The source code is a single file `x10.py` this needs to be placed
 NOTE
 
   * `device` is the X10 controller device type. `mochad` or `cm17a` are the only valid options. If omitted defaults to `mochad`.
-  * `filename` is the serial port device name, if omitted the device name is guessed.
-  * `host` and `port` is the mochad server address. If omitted defaults to localhost:1099
+      * `mochad` specific settings:
+          * `filename` is the serial port device name, if omitted the device name is guessed.
+      * `cm17a` specific settings:
+          * `host` and `port` is the mochad server address. If omitted defaults to localhost:1099
   * if a house number is omitted, the entire house is used. ON == all lamps on, OFF = all (lamp+switches) on
   * `lights` is the same format that https://home-assistant.io/components/light.x10/ uses. Both `lights` and `switches` can be used or only one.
 

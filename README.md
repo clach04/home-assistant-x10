@@ -30,9 +30,15 @@ The source code is a single file `x10.py` this needs to be placed
         host: 192.168.11.22
         port: 1099
         switches:
-          A1: Hallway Lamp
-          A2: Rocket Launcher
-          B: All B
+          C1: Hallway Lamp
+          C2: Rocket Launcher
+          D: All D
+        lights:
+          - name: Living Room Lamp
+            id: a2
+          - name: Bedroom Lamp
+            id: a3
+          - id: a5
 
 NOTE
 
@@ -40,7 +46,7 @@ NOTE
   * `filename` is the serial port device name, if omitted the device name is guessed.
   * `host` and `port` is the mochad server address. If omitted defaults to localhost:1099
   * if a house number is omitted, the entire house is used. ON == all lamps on, OFF = all (lamp+switches) on
-
+  * `lights` is the same format that https://home-assistant.io/components/light.x10/ uses. Both `lights` and `switches` can be used or only one.
 
 HA should auto install dependencies but in case it does not issue:
 

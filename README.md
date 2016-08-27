@@ -17,8 +17,11 @@ Initial focus is supporting:
 ## Getting Started
 
 The source code is a single file `x10.py` this needs to be placed
-`<config_dir>/custom_components/switch`. Then edit configuration.yaml
-and add a new switch:
+`<config_dir>/custom_components/switch` (i.e. under Windows,
+`%APPDATA%\.homeassistant\custom_components\switch`, under Linux,
+`~/.homeassistant/custom_components/switch`). Then edit `configuration.yaml`
+(i.e. `%APPDATA%\.homeassistant\configuration.yaml` or
+`~/.homeassistant/configuration.yaml`) and add a new switch:
 
     switch:
       - platform: x10

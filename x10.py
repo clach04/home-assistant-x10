@@ -1,4 +1,10 @@
 # custom_components/switch/x10.py
+"""
+Support for X10 modules via Mochad or CM17a FireCracker.
+
+For more information and documentation see
+https://github.com/clach04/home-assistant-x10
+"""
 
 import logging
 

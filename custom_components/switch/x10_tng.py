@@ -88,7 +88,7 @@ class X10Switch(ToggleEntity):
         self._name = name or DEVICE_DEFAULT_NAME
         self._house_code = house_code
         self._unit_number = unit_number
-        self._state = False
+        self._state = False  # on (True) or off (False)?
 
     @property
     def name(self):

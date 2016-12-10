@@ -26,6 +26,7 @@ switch:
 
 CONF_DEVICE = 'device'  # Matches zigbee component
 
+
 class X10Switch(ToggleEntity):
     """Representation of an X10 (switch/lamp) module"""
 

@@ -35,7 +35,7 @@ TODO nested light/switch tags need handling
           C1: Hallway Lamp
           C2: Rocket Launcher
           D: All D
-        lights:
+        devices:
           - name: Living Room Lamp
             id: a2
           - name: Bedroom Lamp
@@ -49,7 +49,7 @@ TODO nested light/switch tags need handling
           C1: LAMP Hallway Lamp
           C2: LAMP Rocket Launcher
           D: LAMP All D
-        lights:
+        devices:
           - name: LAMP Living Room Lamp
             id: a2
           - name: LAMP Bedroom Lamp
@@ -64,7 +64,7 @@ NOTE
       * `cm17a` specific settings:
           * `host` and `port` is the mochad server address. If omitted defaults to localhost:1099
   * if a house number is omitted, the entire house is used. ON == all lamps on, OFF = all (lamp+switches) on
-  * `lights` is the same format that https://home-assistant.io/components/light.x10/ uses. Both `lights` and `switches` can be used or only one.
+  * `devices` is the same format that https://home-assistant.io/components/light.x10/ uses. Both `devices` and `switches` can be used or only one.
 
 HA should auto install dependencies but in case it does not issue:
 

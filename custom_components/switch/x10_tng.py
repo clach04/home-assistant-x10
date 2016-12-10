@@ -61,10 +61,10 @@ def setup_platform(hass, config, add_devices, discovery_info=None):
             switches.append(X10Switch(dev, name, house_code, unit_number))
 
     # Config/settings compatibility with https://home-assistant.io/components/light.x10/
-    config_lights = config.get('lights', [])
-    for light in config_lights:
-        house_and_unit = light['id']
-        name = light.get('name', house_and_unit)
+    config_devices = config.get('devices', [])
+    for x10_device in config_devices:
+        house_and_unit = x10_device['id']
+        name = x10_device.get('name', house_and_unit)
 
         house_code, unit_number = house_and_unit[0], house_and_unit[1:]
         if unit_number == '':
@@ -73,7 +73,7 @@ def setup_platform(hass, config, add_devices, discovery_info=None):
 
         # should house_code, unit_number be validated here?
         # Validation will take place when attempting to switch on/off
-        _LOGGER.info('Adding light X10Switch%r', (dev, name, house_code, unit_number))
+        _LOGGER.info('Adding x10_device X10Switch%r', (dev, name, house_code, unit_number))
         # TODO Add lamp/light support with dimming feature
         switches.append(X10Switch(dev, name, house_code, unit_number))
 

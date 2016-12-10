@@ -11,7 +11,7 @@ https://github.com/clach04/home-assistant-x10
 import logging
 
 from homeassistant.helpers.entity import ToggleEntity
-from homeassistant.const import DEVICE_DEFAULT_NAME, CONF_HOST, CONF_PORT, CONF_FILENAME
+from homeassistant.const import DEVICE_DEFAULT_NAME, CONF_DEVICES, CONF_HOST, CONF_PORT, CONF_FILENAME
 
 REQUIREMENTS = ['x10_any>=0.0.6']
 
@@ -61,7 +61,7 @@ def setup_platform(hass, config, add_devices, discovery_info=None):
             switches.append(X10Switch(dev, name, house_code, unit_number))
 
     # Config/settings compatibility with https://home-assistant.io/components/light.x10/
-    config_devices = config.get('devices', [])
+    config_devices = config.get(CONF_DEVICES, [])
     for x10_device in config_devices:
         house_and_unit = x10_device['id']
         name = x10_device.get('name', house_and_unit)

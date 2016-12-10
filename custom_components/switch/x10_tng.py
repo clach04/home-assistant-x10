@@ -133,7 +133,6 @@ class X10Switch(ToggleEntity):
         """Fetch new state data for this switch.
 
         This is the only method that should fetch new data for Home Assistant.
-        This is the only method that should fetch new data for Home Assitant. TYPO fixme upstream in https://home-assistant.io/developers/platform_example_light/ wiki
         """
         # (Probably) called every 30 seconds
         # is_on() should then return that state

@@ -25,7 +25,7 @@ these needs to be placed
 (i.e. `%APPDATA%\.homeassistant\configuration.yaml` or
 `~/.homeassistant/configuration.yaml`) and add a new switch:
 
-TODO nested light/switch tags need handling
+TODO what to do about `switches` section?
 
     switch:
       - platform: x10_tng
@@ -36,10 +36,10 @@ TODO nested light/switch tags need handling
           C2: Rocket Launcher
           D: All D
         devices:
-          - name: Living Room Lamp
-            id: a2
-          - name: Bedroom Lamp
-            id: a3
+          - id: a2
+            name: Living Room Lamp
+          - id: a3
+            name: Bedroom Lamp
           - id: a5
     light:
       - platform: x10_tng
@@ -50,10 +50,10 @@ TODO nested light/switch tags need handling
           C2: LAMP Rocket Launcher
           D: LAMP All D
         devices:
-          - name: LAMP Living Room Lamp
-            id: a2
-          - name: LAMP Bedroom Lamp
-            id: a3
+          - id: a2
+            name: Living Room Lamp
+          - id: a3
+            name: Bedroom Lamp
           - id: a5
 
 NOTE

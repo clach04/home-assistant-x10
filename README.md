@@ -16,19 +16,21 @@ Initial focus is supporting:
 
 ## Getting Started
 
-The source code is a single file `x10.py` this needs to be placed
-`<config_dir>/custom_components/switch` (i.e. under Windows,
+The source code is in two files `x10_tng.py` from the `light` and `switch` directories
+these needs to be placed
+`<config_dir>/custom_components/switch` and `<config_dir>/custom_components/light`
+(i.e. under Windows,
 `%APPDATA%\.homeassistant\custom_components\switch`, under Linux,
-`~/.homeassistant/custom_components/switch`). Then edit `configuration.yaml`
+`~/.homeassistant/custom_components/switch`), etc.. Then edit `configuration.yaml`
 (i.e. `%APPDATA%\.homeassistant\configuration.yaml` or
 `~/.homeassistant/configuration.yaml`) and add a new switch:
 
+TODO nested light/switch tags need handling
+
     switch:
-      - platform: x10
+      - platform: x10_tng
         device: cm17a
         filename: COM11
-        host: 192.168.11.22
-        port: 1099
         switches:
           C1: Hallway Lamp
           C2: Rocket Launcher
@@ -37,6 +39,20 @@ The source code is a single file `x10.py` this needs to be placed
           - name: Living Room Lamp
             id: a2
           - name: Bedroom Lamp
+            id: a3
+          - id: a5
+    light:
+      - platform: x10_tng
+        device: cm17a
+        filename: COM11
+        switches:
+          C1: LAMP Hallway Lamp
+          C2: LAMP Rocket Launcher
+          D: LAMP All D
+        lights:
+          - name: LAMP Living Room Lamp
+            id: a2
+          - name: LAMP Bedroom Lamp
             id: a3
           - id: a5
 

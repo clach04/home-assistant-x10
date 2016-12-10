@@ -1,4 +1,4 @@
-# custom_components/switch/x10.py
+# custom_components/switch/x10_tng.py
 """
 Support for X10 modules via Mochad or CM17a FireCracker.
 Both modules/switches and lights are supported (brightness for

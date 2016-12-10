@@ -36,11 +36,11 @@ TODO what to do about `switches` section?
           C2: Rocket Launcher
           D: All D
         devices:
-          - id: a2
-            name: Living Room Lamp
-          - id: a3
-            name: Bedroom Lamp
-          - id: a5
+          - id: b2
+            name: B Living Room Lamp
+          - id: b3
+            name: B Bedroom Lamp
+          - id: b5
     light:
       - platform: x10_tng
         device: cm17a
@@ -55,6 +55,29 @@ TODO what to do about `switches` section?
           - id: a3
             name: Bedroom Lamp
           - id: a5
+
+    # Define input_slider for brightness control demo
+    # Based on https://home-assistant.io/components/input_slider/
+    # NOTE slider does not get updated if lamp is switched off, this is mostly to see if you light/module supports dimming
+    input_slider:
+      bedroom_brightness:
+        name: Brightness
+        initial: 254
+        min: 0
+        max: 254
+        step: 1
+
+    automation:
+      - alias: Bedroom Light - Adjust Brightness
+        trigger:
+          platform: state
+          entity_id: input_slider.bedroom_brightness
+        action:
+          - service: light.turn_on
+    # Note the use of 'data_template:' below rather than the normal 'data:' if you weren't using an input variable
+            data_template:
+              entity_id: light.bedroom_lamp
+              brightness: '{{ trigger.to_state.state | int }}'
 
 NOTE
 

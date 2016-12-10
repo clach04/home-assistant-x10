@@ -26,60 +26,6 @@ switch:
 
 CONF_DEVICE = 'device'  # Matches zigbee component
 
-def setup_platform(hass, config, add_devices, discovery_info=None):
-    import x10_any
-
-    device_config = config.get(CONF_DEVICE, 'mochad')
-    if device_config == 'mochad':
-        mochad_host = config.get(CONF_HOST, 'localhost')
-        mochad_port = config.get(CONF_PORT, 1099)
-
-        _LOGGER.info('Using network MochadDriver %r:%r', mochad_host, mochad_port)
-        dev = x10_any.MochadDriver((mochad_host, mochad_port))
-        # TODO extra config: default_type (rf|pl)
-    elif device_config == 'cm17a':
-        serial_port = config.get(CONF_FILENAME, None)  # Matches components, acer_projector.py
-
-        # If serial_port is None, FirecrackerDriver will attempt to auto detect
-        _LOGGER.info('Using serial FirecrackerDriver %r', serial_port)
-        dev = x10_any.FirecrackerDriver(serial_port)
-    else:
-        _LOGGER.error('Invalid config. Valid values for %s, are `mochad` and `cm17a`', CONF_DEVICE)
-
-    switches_config = config.get('switches')  # is there a predefined constant for this in homeassistant.const?
-    switches = []
-    if switches_config:
-        for house_and_unit, name in switches_config.items():
-            house_code, unit_number = house_and_unit[0], house_and_unit[1:]
-            if unit_number == '':
-                # Assume this is for the whole house
-                unit_number = None
-
-            # should house_code, unit_number be validated here?
-            # Validation will take place when attempting to switch on/off
-            _LOGGER.info('Adding switch X10Switch%r', (dev, name, house_code, unit_number))
-            switches.append(X10Switch(dev, name, house_code, unit_number))
-
-    # Config/settings compatibility with https://home-assistant.io/components/light.x10/
-    config_devices = config.get(CONF_DEVICES, [])
-    for x10_device in config_devices:
-        house_and_unit = x10_device[CONF_ID]
-        name = x10_device.get(CONF_NAME, house_and_unit)
-
-        house_code, unit_number = house_and_unit[0], house_and_unit[1:]
-        if unit_number == '':
-            # Assume this is for the whole house
-            unit_number = None
-
-        # should house_code, unit_number be validated here?
-        # Validation will take place when attempting to switch on/off
-        _LOGGER.info('Adding x10_device X10Switch%r', (dev, name, house_code, unit_number))
-        # TODO Add lamp/light support with dimming feature
-        switches.append(X10Switch(dev, name, house_code, unit_number))
-
-    add_devices(switches)
-
-
 class X10Switch(ToggleEntity):
     """Representation of an X10 (switch/lamp) module"""
 
@@ -138,3 +84,64 @@ class X10Switch(ToggleEntity):
         # is_on() should then return that state
         _LOGGER.info('update() called')
     '''
+
+
+def setup_x10(hass, config, add_devices, discovery_info=None, deviceclass=X10Switch):
+    """Same API as setup_platform but with an additional parameter, the Class to use
+    setup_platform() will essentially be currying this function.
+    """
+    import x10_any
+
+    device_config = config.get(CONF_DEVICE, 'mochad')
+    if device_config == 'mochad':
+        mochad_host = config.get(CONF_HOST, 'localhost')
+        mochad_port = config.get(CONF_PORT, 1099)
+
+        _LOGGER.info('Using network MochadDriver %r:%r', mochad_host, mochad_port)
+        dev = x10_any.MochadDriver((mochad_host, mochad_port))
+        # TODO extra config: default_type (rf|pl)
+    elif device_config == 'cm17a':
+        serial_port = config.get(CONF_FILENAME, None)  # Matches components, acer_projector.py
+
+        # If serial_port is None, FirecrackerDriver will attempt to auto detect
+        _LOGGER.info('Using serial FirecrackerDriver %r', serial_port)
+        dev = x10_any.FirecrackerDriver(serial_port)
+    else:
+        _LOGGER.error('Invalid config. Valid values for %s, are `mochad` and `cm17a`', CONF_DEVICE)
+
+    switches_config = config.get('switches')  # is there a predefined constant for this in homeassistant.const?
+    switches = []
+    if switches_config:
+        for house_and_unit, name in switches_config.items():
+            house_code, unit_number = house_and_unit[0], house_and_unit[1:]
+            if unit_number == '':
+                # Assume this is for the whole house
+                unit_number = None
+
+            # should house_code, unit_number be validated here?
+            # Validation will take place when attempting to switch on/off
+            _LOGGER.info('Adding switch %s%r', deviceclass.__name__, (dev, name, house_code, unit_number))
+            switches.append(deviceclass(dev, name, house_code, unit_number))
+
+    # Config/settings compatibility with https://home-assistant.io/components/light.x10/
+    config_devices = config.get(CONF_DEVICES, [])
+    for x10_device in config_devices:
+        house_and_unit = x10_device[CONF_ID]
+        name = x10_device.get(CONF_NAME, house_and_unit)
+
+        house_code, unit_number = house_and_unit[0], house_and_unit[1:]
+        if unit_number == '':
+            # Assume this is for the whole house
+            unit_number = None
+
+        # should house_code, unit_number be validated here?
+        # Validation will take place when attempting to switch on/off
+        _LOGGER.info('Adding x10_device %s%r', deviceclass.__name__, (dev, name, house_code, unit_number))
+        # TODO Add lamp/light support with dimming feature
+        switches.append(deviceclass(dev, name, house_code, unit_number))
+
+    add_devices(switches)
+
+
+def setup_platform(hass, config, add_devices, discovery_info=None):
+    setup_x10(hass, config, add_devices, discovery_info=discovery_info, deviceclass=X10Switch)

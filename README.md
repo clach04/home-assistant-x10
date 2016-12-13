@@ -26,9 +26,10 @@ The source code is a single file `x10.py` this needs to be placed
     switch:
       - platform: x10
         device: cm17a
-        filename: COM11
-        host: 192.168.11.22
-        port: 1099
+        filename: COM11              # (optional)
+        #device: mochad
+        #host: 192.168.11.22          # (optional)
+        #port: 1099                   # (optional)
         switches:
           C1: Hallway Lamp
           C2: Rocket Launcher
@@ -43,12 +44,14 @@ The source code is a single file `x10.py` this needs to be placed
 NOTE
 
   * `device` is the X10 controller device type. `mochad` or `cm17a` are the only valid options. If omitted defaults to `mochad`.
-      * `mochad` specific settings:
-          * `filename` is the serial port device name, if omitted the device name is guessed.
-      * `cm17a` specific settings:
-          * `host` and `port` is the mochad server address. If omitted defaults to localhost:1099
+  * `filename` is the serial port device name, if omitted the device name is guessed.
+      * Windows: COM3
+      * Linux: /dev/ttyS0
+
+  * `Mocad` specific settings:
+          * `host` is the mochad server address. If ommited defaults to localhost.
+          * `port` port.  If omitted defaults to 1099.
   * if a house number is omitted, the entire house is used. ON == all lamps on, OFF = all (lamp+switches) on
-  * `lights` is the same format that https://home-assistant.io/components/light.x10/ uses. Both `lights` and `switches` can be used or only one.
 
 HA should auto install dependencies but in case it does not issue:
 

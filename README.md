@@ -79,13 +79,16 @@ TODO what to do about `switches` section?
               entity_id: light.bedroom_lamp
               brightness: '{{ trigger.to_state.state | int }}'
 
-NOTE
+Notes
 
   * `device` is the X10 controller device type. `mochad` or `cm17a` are the only valid options. If omitted defaults to `mochad`.
       * `mochad` specific settings:
-          * `host` and `port` is the mochad server address. If omitted defaults to `localhost:1099`
+          * `host` is the mochad server address. If ommited defaults to localhost.
+          * `port` port.  If omitted defaults to 1099.
       * `cm17a` specific settings (NOTE use this for cm19a device):
-          * `filename` is the serial port device name, if omitted the device name is guessed.
+          * `filename` is the serial port device name, if omitted the device name is guessed. Examples:
+              * Windows: `COM3`
+              * Linux: `/dev/ttyS0`
   * if a house number is omitted, the entire house is used. ON == all lamps on, OFF = all (lamp+switches) on
   * `devices` is the same format that https://home-assistant.io/components/light.x10/ uses. Both `devices` and `switches` can be used or only one.
 

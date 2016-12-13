@@ -44,10 +44,9 @@ The source code is a single file `x10.py` this needs to be placed
 NOTE
 
   * `device` is the X10 controller device type. `mochad` or `cm17a` are the only valid options. If omitted defaults to `mochad`.
-  * `filename` is the serial port device name, if omitted the device name is guessed.
-      * Windows: COM3
-      * Linux: /dev/ttyS0
-
+  * `filename` is the serial port device name, if omitted the device name is guessed. Examples:
+      * Windows: `COM3`
+      * Linux: `/dev/ttyS0`
   * `Mocad` specific settings:
           * `host` is the mochad server address. If ommited defaults to localhost.
           * `port` port.  If omitted defaults to 1099.

@@ -48,8 +48,8 @@ NOTE
       * Windows: `COM3`
       * Linux: `/dev/ttyS0`
   * `Mocad` specific settings:
-          * `host` is the mochad server address. If ommited defaults to localhost.
-          * `port` port.  If omitted defaults to 1099.
+      * `host` is the mochad server address. If ommited defaults to localhost.
+      * `port` port.  If omitted defaults to 1099.
   * if a house number is omitted, the entire house is used. ON == all lamps on, OFF = all (lamp+switches) on
 
 HA should auto install dependencies but in case it does not issue:

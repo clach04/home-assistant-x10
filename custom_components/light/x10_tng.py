@@ -14,11 +14,11 @@ REQUIREMENTS = ['x10_any>=0.0.6']
 _LOGGER = logging.getLogger(__name__)
 
 
-class X10Light(X10Switch):
+class X10Light(Light, X10Switch):
     """Representation of an X10 lamp) module that supports dimming"""
 
     def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+        X10Switch.__init__(self, *args, **kwargs)
         self._brightness = 0
 
     @property

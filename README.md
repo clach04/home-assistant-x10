@@ -25,16 +25,12 @@ these needs to be placed
 (i.e. `%APPDATA%\.homeassistant\configuration.yaml` or
 `~/.homeassistant/configuration.yaml`) and add a new switch:
 
-TODO what to do about `switches` section?
+TODO what to do about `switch->switches` section (still supported for backwards compat)?
 
     switch:
       - platform: x10_tng
         device: cm17a
         filename: COM11
-        switches:
-          C1: Hallway Lamp
-          C2: Rocket Launcher
-          D: All D
         devices:
           - id: b2
             name: B Living Room Lamp
@@ -45,10 +41,6 @@ TODO what to do about `switches` section?
       - platform: x10_tng
         device: cm17a
         filename: COM11
-        switches:
-          C1: LAMP Hallway Lamp
-          C2: LAMP Rocket Launcher
-          D: LAMP All D
         devices:
           - id: a2
             name: Living Room Lamp

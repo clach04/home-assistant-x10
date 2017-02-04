@@ -82,7 +82,7 @@ Notes
               * Windows: `COM3`
               * Linux: `/dev/ttyS0`
   * if a house number is omitted, the entire house is used. ON == all lamps on, OFF = all (lamp+switches) on
-  * `devices` is the same format that https://home-assistant.io/components/light.x10/ uses. Both `devices` and `switches` can be used or only one.
+  * `devices` is the same format that https://home-assistant.io/components/light.x10/ uses. `switches` is supported for backwards compatability (and ease of editing) as well (i.e. both supported at same time), see https://github.com/clach04/home-assistant-x10 documentation.
 
 HA should auto install dependencies but in case it does not issue:
 

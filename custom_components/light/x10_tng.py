@@ -47,7 +47,11 @@ class X10Light(Light, X10Switch):
         # Now update state information
         self._state = True
         self._brightness = brightness
-        self.update_ha_state()
+        if (MAJOR_VERSION, MINOR_VERSION) >= (0, 39):
+            self.schedule_update_ha_state()
+        else:
+            # TODO remove this!
+            self.update_ha_state()
 
 
 def setup_platform(hass, config, add_devices, discovery_info=None):

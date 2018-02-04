@@ -113,3 +113,4 @@ Giver user dialout (serial port) access:
     * Mochad status is not implemented
     * This means if a device is already ON when HA is started, two state changes are needed to really turn it off
   * No control over Mochad command type (yet), currently uses x10_any default of 'rf'
+  * Relies on https://github.com/clach04/x10_any (which has its own dependencies)

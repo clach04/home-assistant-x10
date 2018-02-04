@@ -62,11 +62,7 @@ class X10Switch(ToggleEntity):
         self._device.x10_command(self._house_code, self._unit_number, state)
         # TODO success check?
         self._state = True
-        if (MAJOR_VERSION, MINOR_VERSION) >= (0, 39):
-            self.schedule_update_ha_state()
-        else:
-            # TODO remove this!
-            self.update_ha_state()
+        self.schedule_update_ha_state()
 
     def turn_off(self):
         """Turn the device off."""
@@ -77,11 +73,7 @@ class X10Switch(ToggleEntity):
         self._device.x10_command(self._house_code, self._unit_number, state)
         # TODO success check?
         self._state = False
-        if (MAJOR_VERSION, MINOR_VERSION) >= (0, 39):
-            self.schedule_update_ha_state()
-        else:
-            # TODO remove this!
-            self.update_ha_state()
+        self.schedule_update_ha_state()
 
     '''
     def update(self):

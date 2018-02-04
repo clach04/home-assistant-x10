@@ -21,7 +21,13 @@ these needs to be placed
 `<config_dir>/custom_components/switch` and `<config_dir>/custom_components/light`
 (i.e. under Windows,
 `%APPDATA%\.homeassistant\custom_components\switch`, under Linux,
-`~/.homeassistant/custom_components/switch`), etc.. Then edit `configuration.yaml`
+`~/.homeassistant/custom_components/switch`), etc.
+
+E.g. raspbian/hassbian:
+
+    cp -R home-assistant-x10/custom_components/ /home/homeassistant/.homeassistant/
+
+Then edit `configuration.yaml`
 (i.e. `%APPDATA%\.homeassistant\configuration.yaml` or
 `~/.homeassistant/configuration.yaml`) and add a new switch:
 

@@ -7,9 +7,7 @@ from homeassistant.helpers.entity import ToggleEntity
 from homeassistant.const import DEVICE_DEFAULT_NAME, CONF_HOST, CONF_PORT, CONF_FILENAME
 from homeassistant.components.light import ATTR_BRIGHTNESS, SUPPORT_BRIGHTNESS, Light
 
-from custom_components.switch.x10_tng import CONF_DEVICE, setup_x10, X10Switch  # WIP
-
-REQUIREMENTS = ['x10_any>=0.0.6']
+from custom_components.switch.x10_tng import CONF_DEVICE, REQUIREMENTS, setup_x10, X10Switch  # WIP
 
 _LOGGER = logging.getLogger(__name__)
 

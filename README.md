@@ -83,12 +83,13 @@ Notes
       * `mochad` specific settings:
           * `host` is the mochad server address. If ommited defaults to localhost.
           * `port` port.  If omitted defaults to 1099.
-      * `cm17a` specific settings (NOTE use this for cm19a device):
+      * `cm17a` specific settings (NOTE used for Firecracker, both cm17a and cm19a devices):
           * `filename` is the serial port device name, if omitted the device name is guessed. Examples:
               * Windows: `COM3`
               * Linux: `/dev/ttyS0`
   * if a house number is omitted, the entire house is used. ON == all lamps on, OFF = all (lamp+switches) on
-  * `devices` is the same format that https://home-assistant.io/components/light.x10/ uses. `switches` is supported for backwards compatability (and ease of editing) as well (i.e. both supported at same time), see https://github.com/clach04/home-assistant-x10 documentation.
+  * `devices` is the same format that https://home-assistant.io/components/light.x10/ uses.
+  * `switches` is still supported for backwards compatability (and ease of editing) as well (i.e. both supported at same time), see https://github.com/clach04/home-assistant-x10/tree/old_version1 documentation, the recommendation is to use `devices`.
 
 HA should auto install dependencies but in case it does not issue:
 

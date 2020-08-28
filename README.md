@@ -108,6 +108,11 @@ Giver user dialout (serial port) access:
     # NOTE requires logout/login to take effect
     sudo usermod -a -G dialout $USER
 
+### Serial Port Permissions under Docker
+
+See notes in https://github.com/clach04/x10_rest/blob/master/Dockerfile on cgroups
+and handling USB devices that get unplugged/restored.
+
 ## Notes
 
   * Does NOT implement state checks, it assumes the current state is the last state controlled via HA. Defaults to OFF on start up

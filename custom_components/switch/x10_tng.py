@@ -6,6 +6,8 @@ lamps not implemented).
 
 For more information and documentation see
 https://github.com/clach04/home-assistant-x10
+
+Tested with Home Assistant 0.82.1
 """
 
 import logging

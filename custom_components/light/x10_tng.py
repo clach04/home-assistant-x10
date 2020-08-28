@@ -1,5 +1,6 @@
 # custom_components/light/x10_tng.py
 # NOTE part of custom_components/switch/x10_tng.py
+# Tested with Home Assistant 0.82.1
 
 import logging
 

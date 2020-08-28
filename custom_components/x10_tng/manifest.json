@@ -1,0 +1,9 @@
+{
+  "domain": "x10_tng",
+  "name": "x10 TNG",
+  "documentation": "https://github.com/clach04/home-assistant-x10",
+  "dependencies": [],
+  "codeowners": [],
+  "requirements": ["x10_any>=0.0.7"]
+}
+

@@ -1,19 +1,36 @@
-# custom_components/light/x10_tng.py
-# NOTE part of custom_components/switch/x10_tng.py
-# Tested with Home Assistant 0.82.1
+"""
+Support for X10 modules via Mochad or CM17a FireCracker.
+# Tested with Home Assistant 0.114.4
+
+For more information and documentation see
+https://github.com/clach04/home-assistant-x10
+
+# Tested with Home Assistant 0.114.4
+"""
+
 
 import logging
 
-from homeassistant.helpers.entity import ToggleEntity
+from homeassistant.const import CONF_DEVICES, CONF_ID, CONF_NAME
 from homeassistant.const import DEVICE_DEFAULT_NAME, CONF_HOST, CONF_PORT, CONF_FILENAME
-from homeassistant.components.light import ATTR_BRIGHTNESS, SUPPORT_BRIGHTNESS, Light
+from homeassistant.components.light import ATTR_BRIGHTNESS, SUPPORT_BRIGHTNESS, PLATFORM_SCHEMA, LightEntity
 
-from custom_components.switch.x10_tng import CONF_DEVICE, REQUIREMENTS, setup_x10, X10Switch  # WIP
+#from custom_components.x10_tng.switch import setup_x10, X10Switch  # WIP
+from .switch import cv, vol, setup_x10, X10Switch  # WIP
 
 _LOGGER = logging.getLogger(__name__)
 
+PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend(
+    {
+        vol.Required(CONF_DEVICES): vol.All(
+            cv.ensure_list,
+            [{vol.Required(CONF_ID): cv.string, vol.Required(CONF_NAME): cv.string}],
+        )
+    }
+)
 
-class X10Light(Light, X10Switch):
+
+class X10Light(LightEntity, X10Switch):
     """Representation of an X10 lamp) module that supports dimming"""
 
     def __init__(self, *args, **kwargs):

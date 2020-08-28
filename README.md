@@ -1,4 +1,4 @@
-# x10 component for Home Assistant 0.82.1
+# x10 component for Home Assistant 0.114.4
 
 Custom component https://home-assistant.io
 

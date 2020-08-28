@@ -1,33 +1,34 @@
-# custom_components/switch/x10_tng.py
 """
 Support for X10 modules via Mochad or CM17a FireCracker.
-Both modules/switches and lights are supported (brightness for
-lamps not implemented).
+# Tested with Home Assistant 0.114.4
 
 For more information and documentation see
 https://github.com/clach04/home-assistant-x10
-
-Tested with Home Assistant 0.82.1
 """
 
 import logging
 
-from homeassistant.helpers.entity import ToggleEntity
-from homeassistant.const import DEVICE_DEFAULT_NAME, CONF_DEVICES, CONF_HOST, CONF_ID, CONF_NAME, CONF_PORT, CONF_FILENAME
+import voluptuous as vol
 
-REQUIREMENTS = ['x10_any>=0.0.7']
+from homeassistant.components.light import (
+    PLATFORM_SCHEMA,
+)
+# matbe togle from there?
+
+from homeassistant.helpers.entity import ToggleEntity
+from homeassistant.const import CONF_DEVICES, CONF_ID, CONF_NAME
+import homeassistant.helpers.config_validation as cv
 
 _LOGGER = logging.getLogger(__name__)
 
-"""
-switch:
-  - platform: x10
-    switches:
-      C6: Small Moon Lamp
-"""
-
-CONF_DEVICE = 'device'  # Matches zigbee component
-
+PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend(
+    {
+        vol.Required(CONF_DEVICES): vol.All(
+            cv.ensure_list,
+            [{vol.Required(CONF_ID): cv.string, vol.Required(CONF_NAME): cv.string}],
+        )
+    }
+)
 
 class X10Switch(ToggleEntity):
     """Representation of an X10 (switch/lamp) module"""
@@ -95,8 +96,21 @@ def setup_x10(hass, config, add_devices, discovery_info=None, deviceclass=X10Swi
     """
     import x10_any
 
+    device_config = 'cm17a' # FIXME, should not be hard coded
+    if device_config == 'cm17a':
+        #serial_port = config.get(CONF_FILENAME, None)  # Matches components, acer_projector.py
+        serial_port = None  # FIXME!
+
+        # If serial_port is None, FirecrackerDriver will attempt to auto detect
+        _LOGGER.info('Using serial FirecrackerDriver %r', serial_port)
+        dev = x10_any.FirecrackerDriver(serial_port)
+    else:
+        _LOGGER.error('Invalid config. Valid values for %s, are `mochad` and `cm17a`', 'FIXME devicename') # CONF_DEVICE)
+    """
+    """
+    """
     device_config = config.get(CONF_DEVICE, 'mochad')
-    if device_config == 'mochad':
+    if device_config == 'cm17a':
         mochad_host = config.get(CONF_HOST, 'localhost')
         mochad_port = config.get(CONF_PORT, 1099)
 
@@ -111,6 +125,7 @@ def setup_x10(hass, config, add_devices, discovery_info=None, deviceclass=X10Swi
         dev = x10_any.FirecrackerDriver(serial_port)
     else:
         _LOGGER.error('Invalid config. Valid values for %s, are `mochad` and `cm17a`', CONF_DEVICE)
+    """
 
     switches_config = config.get('switches')  # is there a predefined constant for this in homeassistant.const?
     switches = []
@@ -148,3 +163,4 @@ def setup_x10(hass, config, add_devices, discovery_info=None, deviceclass=X10Swi
 
 def setup_platform(hass, config, add_devices, discovery_info=None):
     setup_x10(hass, config, add_devices, discovery_info=discovery_info, deviceclass=X10Switch)
+
